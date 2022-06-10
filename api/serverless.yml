@@ -1,0 +1,19 @@
+service: api
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: programmaticServerless
+  region: us-east-1
+  httpApi:
+    cors: true
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /hello-test
+          method: GET
