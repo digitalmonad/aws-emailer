@@ -7,13 +7,21 @@ provider:
   runtime: nodejs12.x
   profile: programmaticServerless
   region: us-east-1
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - ses:*
+          Resource: '*'
+
   httpApi:
     cors: true
 
 functions:
-  hello:
-    handler: handler.hello
+  sendEmail:
+    handler: sendEmail.handler
     events:
       - httpApi:
-          path: /hello-test
-          method: GET
+          path: /send-email
+          method: POST
